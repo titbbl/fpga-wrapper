@@ -1,0 +1,21 @@
+2025-06-24T14:59:50.37883700255-14:59:50 **** Incremental Build of configuration Debug for project TEST_app ****
+000-make all 
+000-Building file: ../src/helloworld.c
+000-Invoking: MicroBlaze gcc compiler
+000-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -I/home/tboittin/STAGE/TEST/export/TEST/sw/TEST/standalone_domain/bspinclude/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
+000-Finished building: ../src/helloworld.c
+000- 
+000-Building target: TEST_app.elf
+000-Invoking: MicroBlaze gcc linker
+000-mb-gcc -Wl,-T -Wl,../src/lscript.ld -L/home/tboittin/STAGE/TEST/export/TEST/sw/TEST/standalone_domain/bsplib/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "TEST_app.elf" ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+000-Finished building target: TEST_app.elf
+000- 
+000-Invoking: MicroBlaze Print Size
+000-mb-size TEST_app.elf  |tee "TEST_app.elf.size"
+000-   text	   data	    bss	    dec	    hex	filename
+000-   6004	    272	   3108	   9384	   24a8	TEST_app.elf
+000-Finished building: TEST_app.elf.size
+000- 
+00255-
+14:59:51 Build Finished (took 725ms)
+
