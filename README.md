@@ -4,3 +4,5 @@ Ce projet met en œuvre un système de vérification d'identifiants sur FPGA à 
 Dans ce projet vous retrouverez deux dossier : "IP_Generator" et "IP_wrapper" ce sont les deux IP créés afin de pourvoir les ajouter à notre bloc design principal
 
 Le dossier TEST_app c'est le projet d'application dans Vitis où on retrouve le code c qui va tourner dans le MicroBlaze
+
+Le fichier .xsa c'est l'export du hardware (incluant le bitstream)
