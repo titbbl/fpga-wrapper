@@ -1,33 +1,37 @@
-`timescale 1ns / 1ps
-
+`timescale 1 ns / 1 ps
 module monitor (
-    input  wire        clk,
-    input  wire        rst,
-    input  wire        match,
-    output reg  [7:0]  count,
-    output reg  [7:0]  max_value,
-    output wire        block
+    input  wire clk,
+    input  wire rst,
+    input  wire match,
+    output reg  access_granted,
+    output reg  access_denied,
+    output reg  irq_flag
 );
 
-    // Incrémentation si non-match
-    always @(posedge clk or posedge rst) begin
-        if (rst)
-            count <= 8'd0;
-        else if (~match)
-            count <= count + 1;
-        else
-            count <= 8'd0;
-    end
+    reg [3:0] fail_count;
 
-    // Mise à jour de la valeur max atteinte
     always @(posedge clk or posedge rst) begin
-        if (rst)
-            max_value <= 8'd0;
-        else if (count > max_value)
-            max_value <= count;
+        if (rst) begin
+            access_granted <= 0;
+            access_denied  <= 0;
+            irq_flag       <= 0;
+            fail_count     <= 0;
+        end else begin
+            if (match) begin
+                access_granted <= 1;
+                access_denied  <= 0;
+                fail_count     <= 0;
+                irq_flag       <= 0;
+            end else begin
+                access_granted <= 0;
+                access_denied  <= 1;
+                if (fail_count >= 3)
+                    irq_flag <= 1;
+                else
+                    fail_count <= fail_count + 1;
+            end
+        end
     end
-
-    // Blocage si seuil dépassé
-    assign block = (count >= 8'd10); 
 
 endmodule
+
